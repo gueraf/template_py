@@ -57,8 +57,7 @@ jobs:
       - run:
           name: "Continue with dynamic config"
           command: |
-            circleci config process generated_config.yml > processed_config.yml
-            circleci continue --config processed_config.yml
+            circleci continue --config generated_config.yml
 
 workflows:
   setup-workflow:
