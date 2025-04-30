@@ -45,7 +45,7 @@ jobs:
               echo "          command: \"sudo npm install -g @bazel/bazelisk\"" >> generated_config.yml
               echo "      - run:" >> generated_config.yml
               echo "          name: \"Run Bazel test: ${target}\"" >> generated_config.yml
-              echo "          command: \"bazelisk test ${target}\"" >> generated_config.yml
+              echo "          command: \"bazelisk test --build_tests_only ${target}\"" >> generated_config.yml
             done
 
             # Add workflow configuration
