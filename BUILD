@@ -6,7 +6,7 @@ load("@rules_uv//uv:pip.bzl", "pip_compile")
 
 pip_compile(
     name = "requirements",
-    requirements_in = "//:requirements.in",
+    requirements_in = "//:requirements.txt",
     requirements_txt = "//:requirements_lock.txt",
 )
 
