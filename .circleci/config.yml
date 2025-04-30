@@ -30,6 +30,11 @@ jobs:
               # Create a sanitized job name from the target
               job_name=$(echo "$target" | tr '/:' '__' | tr -d '()' | sed 's/^_//g')
               
+              # Ensure job name starts with a letter (CircleCI requirement)
+              if [[ ! $job_name =~ ^[A-Za-z] ]]; then
+                job_name="job-${job_name}"
+              fi
+              
               echo "  ${job_name}:" >> generated_config.yml
               echo "    docker:" >> generated_config.yml
               echo "      - image: cimg/python:3.12.9-node" >> generated_config.yml
@@ -52,6 +57,12 @@ jobs:
             # Add all jobs to workflow
             for target in $TEST_TARGETS; do
               job_name=$(echo "$target" | tr '/:' '__' | tr -d '()' | sed 's/^_//g')
+              
+              # Ensure job name starts with a letter (CircleCI requirement)
+              if [[ ! $job_name =~ ^[A-Za-z] ]]; then
+                job_name="job-${job_name}"
+              fi
+              
               echo "      - ${job_name}" >> generated_config.yml
             done
 
