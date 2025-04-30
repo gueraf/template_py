@@ -1,3 +1,5 @@
+# gazelle:ignore
+
 load("@aspect_rules_py//py:defs.bzl", "py_binary")
 load("//:pypi_pkgs_lock.bzl", "PIPY_PKGS")
 
