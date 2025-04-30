@@ -8,7 +8,7 @@ orbs:
 jobs:
   setup:
     docker:
-      - image: cimg/node
+      - image: cimg/node:current
     steps:
       - checkout
       - run:
@@ -37,7 +37,7 @@ jobs:
               
               echo "  ${job_name}:" >> generated_config.yml
               echo "    docker:" >> generated_config.yml
-              echo "      - image: cimg/python:3.12.9-node" >> generated_config.yml
+              echo "      - image: cimg/node:current" >> generated_config.yml
               echo "    steps:" >> generated_config.yml
               echo "      - checkout" >> generated_config.yml
               echo "      - run:" >> generated_config.yml
