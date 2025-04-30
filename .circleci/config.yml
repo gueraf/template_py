@@ -18,39 +18,33 @@ jobs:
             TEST_TARGETS=$(bazelisk query 'kind("py_test", //...)' | grep -vE ":requirements_test")
 
             # Start generating the new config
-            cat > generated_config.yml << EOL
-            version: 2.1
-
-            jobs:
-            EOL
+            echo "version: 2.1" > generated_config.yml
+            echo "" >> generated_config.yml
+            echo "jobs:" >> generated_config.yml
 
             # Add a job for each test target
             for target in $TEST_TARGETS; do
               # Create a sanitized job name from the target
               job_name=$(echo "$target" | tr '/:' '__' | tr -d '()' | sed 's/^_//g')
               
-              cat >> generated_config.yml << EOL
-              ${job_name}:
-                docker:
-                  - image: cimg/python:3.12.9-node
-                steps:
-                  - checkout
-                  - run:
-                      name: "Install Bazelisk"
-                      command: "sudo npm install -g @bazel/bazelisk"
-                  - run:
-                      name: "Run Bazel test: ${target}"
-                      command: "bazelisk test ${target}"
-            EOL
+              echo "  ${job_name}:" >> generated_config.yml
+              echo "    docker:" >> generated_config.yml
+              echo "      - image: cimg/python:3.12.9-node" >> generated_config.yml
+              echo "    steps:" >> generated_config.yml
+              echo "      - checkout" >> generated_config.yml
+              echo "      - run:" >> generated_config.yml
+              echo "          name: \"Install Bazelisk\"" >> generated_config.yml
+              echo "          command: \"sudo npm install -g @bazel/bazelisk\"" >> generated_config.yml
+              echo "      - run:" >> generated_config.yml
+              echo "          name: \"Run Bazel test: ${target}\"" >> generated_config.yml
+              echo "          command: \"bazelisk test ${target}\"" >> generated_config.yml
             done
 
             # Add workflow configuration
-            cat >> generated_config.yml << EOL
-
-            workflows:
-              test-workflow:
-                jobs:
-            EOL
+            echo "" >> generated_config.yml
+            echo "workflows:" >> generated_config.yml
+            echo "  test-workflow:" >> generated_config.yml
+            echo "    jobs:" >> generated_config.yml
 
             # Add all jobs to workflow
             for target in $TEST_TARGETS; do
