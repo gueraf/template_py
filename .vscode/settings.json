@@ -120,10 +120,7 @@
     "notebook.formatOnSave.enabled": true,
     "python.analysis.autoImportCompletions": true,
     "python.analysis.exclude": [
-        "${workspaceFolder}/bazel-bin",
-        "${workspaceFolder}/bazel-bluorion",
-        "${workspaceFolder}/bazel-out",
-        "${workspaceFolder}/bazel-testlogs"
+        "${workspaceFolder}/bazel-*"
     ],
     "python.analysis.extraPaths": [
         "${workspaceFolder}/bazel-template_py/external/rules_python++pip+pip_313_absl_py",

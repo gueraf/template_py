@@ -3,21 +3,23 @@
 import json
 import os
 
-BAZEL_WORKSPACE = "template_py"
-BAZEL_PATH = f"bazel-{BAZEL_WORKSPACE}/external"
 RULES_PYTHON_PREFIXS = "rules_python++pip+pip_"
-VSCODE_BAZEL_PATH = "${{workspaceFolder}}/{}".format(BAZEL_PATH)
 VSCODE_SETTINGS_FILE = ".vscode/settings.json"
 
 
 def main():
+    # Example: /home/fabian/Desktop/manual_mlp/./bazel-bin/.vscode/vscode_import_generator.runfiles/.vscode_import_generator.venv/bin
+    bazel_workspace = os.environ["PATH"].split(":")[0].split("/./bazel-bin/")[0].split("/")[-1]
+    bazel_path = f"bazel-{bazel_workspace}/external"
+    vscode_bazel_path = "${{workspaceFolder}}/{}".format(bazel_path)
+
     def check_word_start_with_right_prefix(word):
         return word.startswith(RULES_PYTHON_PREFIXS)
 
     def add_prefix(word):
-        return os.path.join(VSCODE_BAZEL_PATH, word)
+        return os.path.join(vscode_bazel_path, word)
 
-    bazel_externals = os.listdir(BAZEL_PATH)
+    bazel_externals = os.listdir(bazel_path)
     filtered_list = [s for s in bazel_externals if check_word_start_with_right_prefix(s)]
     filtered_list = [add_prefix(s) for s in filtered_list]
     filtered_list.sort()
