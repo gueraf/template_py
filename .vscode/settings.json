@@ -110,7 +110,8 @@
         "utility": "cpp",
         "valarray": "cpp",
         "variant": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "*.bzl": "python",
     },
     "isort.args": [
         "--profile",
