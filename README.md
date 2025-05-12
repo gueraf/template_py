@@ -2,6 +2,8 @@
 
 A template to start hobby projects (Python, Bazel, VSCode).
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/MoqoviNBD61M3rSAe4Bj3m/AuCfEk66ESdUMz8A135Wdf/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/MoqoviNBD61M3rSAe4Bj3m/AuCfEk66ESdUMz8A135Wdf/tree/main)
+
 # Getting Started
 ## Install Bazel(isk)
 ```bash
