@@ -5,6 +5,9 @@ import os
 
 RULES_PYTHON_PREFIXS = "rules_python~~pip~pip_"
 VSCODE_SETTINGS_FILE = ".vscode/settings.json"
+PYREFLY_SETTINGS_FILE = "pyrefly.toml"
+
+# search_path = ["bazel-template_py/external/rules_python~~pip~pip_313_absl_py/site-packages/"]
 
 
 def main():
@@ -22,9 +25,9 @@ def main():
     bazel_externals = os.listdir(bazel_path)
     filtered_list = [s for s in bazel_externals if check_word_start_with_right_prefix(s)]
 
+    # Process VSCODE_SETTINGS_FILE
     vscode_list = [add_prefix(s) for s in filtered_list]
     vscode_list.sort()
-
     with open(VSCODE_SETTINGS_FILE, "r") as f:
         vscode_settings = json.loads(f.read())
 
@@ -33,6 +36,24 @@ def main():
 
     with open(VSCODE_SETTINGS_FILE, "w") as f:
         f.write(json.dumps(vscode_settings, indent=4, sort_keys=True))
+
+    # Process PYREFLY_SETTINGS_FILE
+    pyrefly_search_paths = ",".join(f'"{bazel_path}/{p}/site-packages/"' for p in filtered_list)
+    if os.path.exists(PYREFLY_SETTINGS_FILE):
+        with open(PYREFLY_SETTINGS_FILE, "r") as f:
+            lines = f.readlines()
+
+        new_lines = [
+            (
+                line
+                if not line.startswith("search_path = [")
+                else f"search_path = [{pyrefly_search_paths}]"
+            )
+            for line in lines
+        ]
+
+        with open(PYREFLY_SETTINGS_FILE, "w") as f:
+            f.writelines(new_lines)
 
 
 if __name__ == "__main__":
