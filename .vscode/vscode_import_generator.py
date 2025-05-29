@@ -3,7 +3,7 @@
 import json
 import os
 
-RULES_PYTHON_PREFIXS = "rules_python++pip+pip_"
+RULES_PYTHON_PREFIXS = "rules_python~~pip~pip_"
 VSCODE_SETTINGS_FILE = ".vscode/settings.json"
 
 
@@ -21,14 +21,15 @@ def main():
 
     bazel_externals = os.listdir(bazel_path)
     filtered_list = [s for s in bazel_externals if check_word_start_with_right_prefix(s)]
-    filtered_list = [add_prefix(s) for s in filtered_list]
-    filtered_list.sort()
+
+    vscode_list = [add_prefix(s) for s in filtered_list]
+    vscode_list.sort()
 
     with open(VSCODE_SETTINGS_FILE, "r") as f:
         vscode_settings = json.loads(f.read())
 
-    vscode_settings["python.analysis.extraPaths"] = filtered_list
-    vscode_settings["python.autoComplete.extraPaths"] = filtered_list
+    vscode_settings["python.analysis.extraPaths"] = vscode_list
+    vscode_settings["python.autoComplete.extraPaths"] = vscode_list
 
     with open(VSCODE_SETTINGS_FILE, "w") as f:
         f.write(json.dumps(vscode_settings, indent=4, sort_keys=True))
