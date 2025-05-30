@@ -11,31 +11,18 @@ manifest:
     fsspec: fsspec
     functorch: torch
     isympy: sympy
-    jinja2: jinja2
+    jinja2: Jinja2
     markupsafe: MarkupSafe
     mpmath: mpmath
     networkx: networkx
     numpy: numpy
-    nvidia: nvidia_nvtx_cu12
-    nvidia.cublas: nvidia_cublas_cu12
-    nvidia.cuda_cupti: nvidia_cuda_cupti_cu12
-    nvidia.cuda_nvrtc: nvidia_cuda_nvrtc_cu12
-    nvidia.cuda_runtime: nvidia_cuda_runtime_cu12
-    nvidia.cudnn: nvidia_cudnn_cu12
-    nvidia.cufft: nvidia_cufft_cu12
-    nvidia.cufile: nvidia_cufile_cu12
-    nvidia.curand: nvidia_curand_cu12
-    nvidia.cusolver: nvidia_cusolver_cu12
-    nvidia.cusparse: nvidia_cusparse_cu12
-    nvidia.nccl: nvidia_nccl_cu12
-    nvidia.nvjitlink: nvidia_nvjitlink_cu12
+    opt_einsum: opt_einsum
     pkg_resources: setuptools
     setuptools: setuptools
     sympy: sympy
     torch: torch
     torchgen: torch
-    triton: triton
     typing_extensions: typing_extensions
   pip_repository:
     name: pip
-integrity: e42d37ea8286afd447833abe32c8c034ba0a6e8401375c93596e45ac9c3bedf3
+integrity: 36c5527de091795ff76f039c36dd85998db583b904253d1d010398290a54b2ad

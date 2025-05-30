@@ -6,5 +6,6 @@
         "github.copilot",
         "ms-python.isort",
         "charliermarsh.ruff",
+        "meta.pyrefly"
     ]
 }
