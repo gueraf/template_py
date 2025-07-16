@@ -3,7 +3,7 @@
 import json
 import os
 
-RULES_PYTHON_PREFIXS = "rules_python~~pip~pip_"
+RULES_PYTHON_PREFIXES = ["rules_python~~pip~pip_", "rules_python++pip+pip_"]
 VSCODE_SETTINGS_FILE = ".vscode/settings.json"
 PYREFLY_SETTINGS_FILE = "pyrefly.toml"
 
@@ -17,7 +17,7 @@ def main():
     vscode_bazel_path = "${{workspaceFolder}}/{}".format(bazel_path)
 
     def check_word_start_with_right_prefix(word):
-        return word.startswith(RULES_PYTHON_PREFIXS)
+        return any(word.startswith(prefix) for prefix in RULES_PYTHON_PREFIXES)
 
     def add_prefix(word):
         return os.path.join(vscode_bazel_path, word)
