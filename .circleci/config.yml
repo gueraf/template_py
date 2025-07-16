@@ -15,9 +15,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Install Bazelisk"
-          command: "sudo npm install -g @bazel/bazelisk"
-      - run:
           name: "Generate config"
           command: |
             # Get all Python test targets, excluding requirements_test
