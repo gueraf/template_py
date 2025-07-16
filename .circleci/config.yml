@@ -17,8 +17,8 @@ jobs:
       - run:
           name: "Generate config"
           command: |
-            # Get all Python test targets, excluding requirements_test
-            TEST_TARGETS=$(bazelisk query 'kind("py_test", //...)' | grep -vE ":requirements_test")
+            # Get all test targets (Python, C++, and CUDA), excluding requirements_test
+            TEST_TARGETS=$(bazelisk query 'kind("py_test|cc_test|cuda_test", //...)' | grep -vE ":requirements_test")
 
             # Start generating the new config
             echo "version: 2.1" > generated_config.yml
