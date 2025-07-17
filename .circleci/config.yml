@@ -37,12 +37,12 @@ jobs:
               
               echo "  ${job_name}:" >> generated_config.yml
               echo "    docker:" >> generated_config.yml
-              echo "      - image: cimg/node:current" >> generated_config.yml
+              echo "      - image: gueraf/cuda_bazel:latest" >> generated_config.yml
+              echo "        auth:" >> generated_config.yml
+              echo "          username: \$DOCKER_USERNAME" >> generated_config.yml
+              echo "          password: $DOCKER_ACCESS_TOKEN" >> generated_config.yml
               echo "    steps:" >> generated_config.yml
               echo "      - checkout" >> generated_config.yml
-              echo "      - run:" >> generated_config.yml
-              echo "          name: \"Install Bazelisk\"" >> generated_config.yml
-              echo "          command: \"sudo npm install -g @bazel/bazelisk\"" >> generated_config.yml
               echo "      - run:" >> generated_config.yml
               echo "          name: \"Run Bazel test: ${target}\"" >> generated_config.yml
               echo "          command: \"bazelisk test --build_tests_only ${target}\"" >> generated_config.yml
